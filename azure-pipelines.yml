@@ -1,5 +1,4 @@
 trigger:
-- task: SonarQubeAnalyze@4
 - master
 
 pool:
