@@ -13,11 +13,24 @@ steps:
 - script: |
     npm install
   displayName: 'npm install'
-
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'sonarqubeconn'
+    scannerMode: 'CLI'
+    configMode: 'file'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.projectName=CICDDemo
+      sonar.projectKey=CICDDemo
+- task: SonarQubeAnalyze@4
 - script: |
     npm test
   displayName: 'npm test'
-
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
 - task: ArchiveFiles@2
   displayName: 'Archive files'
   inputs:
