@@ -22,8 +22,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectName=CICDDemo
-      sonar.projectKey=CICDDemo
+      sonar.projectName=CICDDemoProject
+      sonar.projectKey=CICDDemoProject
 - task: SonarQubeAnalyze@4
 - script: |
     npm test
