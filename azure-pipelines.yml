@@ -43,3 +43,19 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts: drop'
   
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'jFrogConn'
+    specSource: 'taskConfiguration'
+    failNoOp: true
+
+- task: ArtifactoryBuildPromotion@1
+  inputs:
+    artifactoryService: 'jFrogConn'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    targetRepo: 'jfrogpipelines'
+    status: 'Released'
+    includeDependencies: true
+    copy: false
+    dryRun: false
