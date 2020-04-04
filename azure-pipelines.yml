@@ -47,6 +47,15 @@ steps:
   inputs:
     artifactoryService: 'jFrogConn'
     specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "files/*.zip",
+            "target": "/example-repo-local"
+          }
+        ]
+      }
     failNoOp: true
 
 - task: ArtifactoryBuildPromotion@1
@@ -54,7 +63,7 @@ steps:
     artifactoryService: 'jFrogConn'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    targetRepo: 'jfrogpipelines'
+    targetRepo: 'example-repo-local'
     status: 'Released'
     includeDependencies: true
     copy: false
