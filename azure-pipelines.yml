@@ -45,6 +45,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts: drop'
   
+
 - task: ArtifactoryGenericUpload@2
   inputs:
     artifactoryService: 'jFrogConn'
@@ -53,15 +54,13 @@ steps:
       {
         "files": [
           {
-            "pattern": "$(System.DefaultWorkingDirectory)/*",
-            "target": "example-repo-local/$(Build.BuildId)"
+            "pattern": "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip",
+            "target": "repo123/$(Build.BuildId)"
           }
         ]
       }
     failNoOp: true
     symlinks: true
-
-
 
 
 
