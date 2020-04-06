@@ -42,9 +42,13 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
+
+
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish artifacts: drop'
-  
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 - task: ArtifactoryGenericUpload@2
   inputs:
