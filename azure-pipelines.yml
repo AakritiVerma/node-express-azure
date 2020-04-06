@@ -43,8 +43,14 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts: drop'
   
-- task: ArtifactoryPublishBuildInfo@1
+
+- task: ArtifactoryBuildPromotion@1
   inputs:
     artifactoryService: 'jFrogConn'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
+    targetRepo: 'example-repo-local'
+    status: 'Released'
+    includeDependencies: true
+    copy: false
+    dryRun: false
