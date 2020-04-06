@@ -43,54 +43,8 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts: drop'
   
-- task: ArtifactoryGenericDownload@3
-  inputs:
-    connection: 'jFrogConn'
-    specSource: 'taskConfiguration'
-    fileSpec: |
-      {
-        "files": [
-          {
-            "pattern": "*.zip",
-            "target": "drop/"
-          }
-        ]
-      }
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    failNoOp: true
 
-- task: ArtifactoryGenericUpload@2
-  inputs:
-    artifactoryService: 'jFrogConn'
-    specSource: 'taskConfiguration'
-    fileSpec: |
-      {
-        "files": [
-          {
-            "pattern": "drop/",
-            "target": "*.zip"
-          }
-        ]
-      }
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    failNoOp: true
 
-- task: ArtifactoryPublishBuildInfo@1
-  inputs:
-    artifactoryService: 'jFrogConn'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-- task: ArtifactoryBuildPromotion@1
-  inputs:
-    artifactoryService: 'jFrogConn'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    targetRepo: 'example-repo-local'
-    status: 'Released'
-    includeDependencies: true
-    copy: false
-    dryRun: false
+
+
+
