@@ -35,11 +35,7 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+
 
 - task: ArchiveFiles@2
   inputs:
@@ -66,7 +62,11 @@ steps:
     failNoOp: true
     symlinks: true
 
-
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 
 
