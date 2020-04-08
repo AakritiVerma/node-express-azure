@@ -35,21 +35,14 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-
 - task: ArchiveFiles@2
   displayName: 'Archive files'
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts: drop'
 
 - task: ArtifactoryGenericUpload@2
   inputs:
@@ -59,13 +52,14 @@ steps:
       {
         "files": [
           {
-            "pattern": "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip",
+            "pattern": "$(System.DefaultWorkingDirectory)",
             "target": "repo123/$(Build.BuildId)"
           }
         ]
       }
     failNoOp: true
     symlinks: true
+
 
 
 
