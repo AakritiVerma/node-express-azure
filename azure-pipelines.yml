@@ -58,7 +58,7 @@ steps:
       {
         "files": [
           {
-            "pattern": "$(System.DefaultWorkingDirectory)",
+            "pattern": "$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip",
             "target": "repo123/$(Build.BuildId)"
           }
         ]
